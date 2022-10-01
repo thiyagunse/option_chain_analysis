@@ -26,20 +26,20 @@
     <table class="table table-bordered table-striped">
       <thead>
         <tr>
-          <th>Interpretation</th>
-          <th>Call Volume</th>
-          <th>Call Net OI</th>
-          <th>Call change in OI</th>
+          <th>Interpretation</th>                    
           <th>Call Price change</th>
           <th>Call LTP</th>
+          <th>Call Volume</th>
+          <th>Call change in OI</th>
+          <th>Call Net OI</th>          
           <th>strike</th>
-          <th>Put LTP</th>
-          <th>Put Price Change</th>
-          <th>Put Change in OI</th>
           <th>Put Net OI</th>
+          <th>Put Change in OI</th>
           <th>Put Volume</th>
+          <th>Put LTP</th>
+          <th>Put Price Change</th> 
           <th>Interpretation</th>
-          <!-- <th>PCR</th>
+         <!-- <th>PCR</th>
           <th>PCR Indication</th> -->
         </tr>
       </thead>
@@ -50,37 +50,36 @@
             <td class="text-success bg-success"><i class="glyphicon glyphicon-arrow-up"></i> {{ CE_A.i }} </td>
           {{else}}
             <td class="text-danger bg-danger"><i class="glyphicon glyphicon-arrow-down"></i> {{ CE_A.i }}</td>
-          {{/if}}
-          <td class="text-right">{{ CE.totalTradedVolume }}</td>
-          <td class="text-right">{{ CE.openInterest }}</td>
-          {{#if CE_A.OI}}
-            <td class="text-right text-success bg-success">{{ CE.changeinOpenInterest }} <i class="glyphicon glyphicon-arrow-up"></i></td>
-          {{else }}
-            <td class="text-right text-danger bg-danger">{{ CE.changeinOpenInterest }} <i class="glyphicon glyphicon-arrow-down"></i></td>
-          {{/if}}
+          {{/if}}   
           {{#if CE_A.price}}
             <td class="text-right text-success bg-success">{{ CE.change }} <i class="glyphicon glyphicon-arrow-up"></i></td>
           {{else}}
             <td class="text-right text-danger bg-danger">{{ CE.change }} <i class="glyphicon glyphicon-arrow-down"></i></td>
           {{/if}}
           <td class="text-right">{{ CE.lastPrice }}</td>
+           <td class="text-right">{{ CE.totalTradedVolume }}</td>
+          {{#if CE_A.OI}}
+            <td class="text-right text-success bg-success">{{ CE.changeinOpenInterest }} <i class="glyphicon glyphicon-arrow-up"></i></td>
+          {{else }}
+            <td class="text-right text-danger bg-danger">{{ CE.changeinOpenInterest }} <i class="glyphicon glyphicon-arrow-down"></i></td>
+          {{/if}}
+          <td class="text-right">{{ CE.openInterest }}</td>
           <th class="text-center">{{ strikePrice }}</th>
+          <td class="text-right">{{ PE.openInterest }}</td>
+          <td class="text-right">{{ PE.totalTradedVolume }}</td>
+           {{#if PE_A.OI}}
+            <td class="text-right text-success bg-success">{{ PE.changeinOpenInterest }} <i class="glyphicon glyphicon-arrow-up"></i></td>
+          {{else }}
+            <td class="text-right text-danger bg-danger">{{ PE.changeinOpenInterest }} <i class="glyphicon glyphicon-arrow-down"></i></td>
+          {{/if}}
           <td class="text-right">{{ PE.lastPrice }}</td>
-          
           {{#if PE_A.price}}
             <td class="text-right text-success bg-success">{{ PE.change }} <i class="glyphicon glyphicon-arrow-up"></i></td>
           {{else}}
             <td class="text-right text-danger bg-danger">{{ PE.change }} <i class="glyphicon glyphicon-arrow-down"></i></td>
           {{/if}}
           
-          {{#if PE_A.OI}}
-            <td class="text-right text-success bg-success">{{ PE.changeinOpenInterest }} <i class="glyphicon glyphicon-arrow-up"></i></td>
-          {{else }}
-            <td class="text-right text-danger bg-danger">{{ PE.changeinOpenInterest }} <i class="glyphicon glyphicon-arrow-down"></i></td>
-          {{/if}}
-
-          <td class="text-right">{{ PE.openInterest }}</td>
-          <td class="text-right">{{ PE.totalTradedVolume }}</td>
+          
           {{#if PE_A.trend }}
             <td class="text-success bg-success"><i class="glyphicon glyphicon-arrow-up"></i> {{ PE_A.i }}</td>
           {{else}}
@@ -182,19 +181,19 @@
       strike.PE_A.price = strike.PE.change > 0 ? 1 : 0;
       strike.PE_A.OI = strike.PE.changeinOpenInterest > 0 ? 1 : 0;
 
-      if (strike.CE_A.price === 0 && strike.CE_A.OI === 0) strike.CE_A.i = 'Long Liquidation';
+      if (strike.CE_A.price === 0 && strike.CE_A.OI === 0) strike.CE_A.i = 'Long unwind'
       else if (strike.CE_A.price === 0 && strike.CE_A.OI === 1) strike.CE_A.i = 'Short Buildup';
       else if (strike.CE_A.price === 1 && strike.CE_A.OI === 1) strike.CE_A.i = 'Short Covering';
       else if (strike.CE_A.price === 1 && strike.CE_A.OI === 0) strike.CE_A.i = 'Long Buildup';
 
-      if (strike.PE_A.price === 0 && strike.PE_A.OI === 0) strike.PE_A.i = 'Long Liquidation';
+      if (strike.PE_A.price === 0 && strike.PE_A.OI === 0) strike.PE_A.i = 'Long unwind';
       else if (strike.PE_A.price === 0 && strike.PE_A.OI === 1) strike.PE_A.i = 'Short Buildup';
       else if (strike.PE_A.price === 1 && strike.PE_A.OI === 1) strike.PE_A.i = 'Short Covering';
       else if (strike.PE_A.price === 1 && strike.PE_A.OI === 0) strike.PE_A.i = 'Long Buildup';
 
-      strike.PE_A.trend = (strike.PE_A.i == 'Long Liquidation' || strike.PE_A.i == 'Short Buildup') ?
+      strike.PE_A.trend = (strike.PE_A.i == 'Long unwind' || strike.PE_A.i == 'Short Buildup') ?
         0 : 1;
-      strike.CE_A.trend = (strike.CE_A.i == 'Long Liquidation' || strike.CE_A.i == 'Short Buildup') ?
+      strike.CE_A.trend = (strike.CE_A.i == 'Long unwind' || strike.CE_A.i == 'Short Buildup') ?
         1 : 0;
 
       return strike;
