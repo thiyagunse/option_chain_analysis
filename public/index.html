@@ -58,17 +58,17 @@
           <td class="text-right">{{ CE.lastPrice }}</td>
            <td class="text-right">{{ CE.totalTradedVolume }}</td>
           {{#if CE_A.OI}}
-            <td class="text-right text-success bg-success">{{ CE.changeinOpenInterest }}  ({{ parseInt(CE.pchangeinOpenInterest)}}%)<i class="glyphicon glyphicon-arrow-up"></i></td>
+            <td class="text-right text-success bg-success">{{ CE.changeinOpenInterest }}  ({{ CE.pchangeinOpenInterest}}%)<i class="glyphicon glyphicon-arrow-up"></i></td>
           {{else }}
-            <td class="text-right text-danger bg-danger">{{ CE.changeinOpenInterest }} ({{ parseInt(CE.pchangeinOpenInterest)}}%) <i class="glyphicon glyphicon-arrow-down"></i></td>
+            <td class="text-right text-danger bg-danger">{{ CE.changeinOpenInterest }} ({{ CE.pchangeinOpenInterest}}%) <i class="glyphicon glyphicon-arrow-down"></i></td>
           {{/if}}
           <td class="text-right">{{ CE.openInterest }}</td>
           <th class="text-center">{{ strikePrice }}</th>
           <td class="text-right">{{ PE.openInterest }}</td>          
            {{#if PE_A.OI}}
-            <td class="text-right text-success bg-success">{{ PE.changeinOpenInterest }} ({{ parseInt(PE.pchangeinOpenInterest)}}%) <i class="glyphicon glyphicon-arrow-up"></i></td>
+            <td class="text-right text-success bg-success">{{ PE.changeinOpenInterest }} ({{ PE.pchangeinOpenInterest}}%) <i class="glyphicon glyphicon-arrow-up"></i></td>
           {{else }}
-            <td class="text-right text-danger bg-danger">{{ PE.changeinOpenInterest }} ({{ parseInt(PE.pchangeinOpenInterest)}}%) <i class="glyphicon glyphicon-arrow-down"></i></td>
+            <td class="text-right text-danger bg-danger">{{ PE.changeinOpenInterest }} ({{ PE.pchangeinOpenInterest}}%) <i class="glyphicon glyphicon-arrow-down"></i></td>
           {{/if}}
           <td class="text-right">{{ PE.totalTradedVolume }}</td>
           <td class="text-right">{{ PE.lastPrice }}</td>
@@ -163,6 +163,8 @@
 
       strike.PE.openInterest = String(strike.PE.openInterest).replace(/(\d)(?=(\d\d)+\d$)/g, "$1,");
       strike.CE.openInterest = String(strike.CE.openInterest).replace(/(\d)(?=(\d\d)+\d$)/g, "$1,");
+      strike.PE.popenInterest = strike.PE.popenInterest.toFixed(1):'';
+      strike.CE.popenInterest = strike.CE.popenInterest.toFixed(1):'';
       strike.PE.totalTradedVolume = String(strike.PE.totalTradedVolume).replace(/(\d)(?=(\d\d)+\d$)/g,
         "$1,");
       strike.CE.totalTradedVolume = String(strike.CE.totalTradedVolume).replace(/(\d)(?=(\d\d)+\d$)/g,
