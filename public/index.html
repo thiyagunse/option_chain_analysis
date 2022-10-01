@@ -139,8 +139,8 @@
       let expiryDate = document.querySelector('#expiryDate').value;
       let option_chain = optionChainData.records.data.filter(c => {
         return (
-            c.strikePrice <= strike_range + (parseInt(underlyingValue / 100) * 100)) &&
-          (c.strikePrice >= (parseInt(underlyingValue / 100) * 100) - strike_range) &&
+            c.strikePrice <= parseInt(strike_range) + (parseInt(underlyingValue / 100) * 100)) &&
+          (c.strikePrice >= (parseInt(underlyingValue / 100) * 100) - parseInt(strike_range)) &&
           c.expiryDate == expiryDate
       });
 
