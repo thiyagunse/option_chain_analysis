@@ -93,11 +93,11 @@
       </tbody>
     </table>
 
-    <p>Developed by <a href="https://www.facebook.com/aaditya.tamrakar.9" target="_blank">Aaditya Tamrakar</a></p>
+    <p>Developed by <a href="#" target="_blank">Aaditya Tamrakar</a></p>
   </script>
 
   <script>
-    var optionChainData, lastUpdated, underlyingValue, selected_expiry, option_chain = [];
+    var optionChainData, lastUpdated, underlyingValue, selected_expiry, option_chain = [],strike_range=500;
 
     function getData(cb) {
       return new Promise((resolve, reject) => {
@@ -139,8 +139,8 @@
       let expiryDate = document.querySelector('#expiryDate').value;
       let option_chain = optionChainData.records.data.filter(c => {
         return (
-            c.strikePrice <= 800 + (parseInt(underlyingValue / 100) * 100)) &&
-          (c.strikePrice >= (parseInt(underlyingValue / 100) * 100) - 800) &&
+            c.strikePrice <= strike_range + (parseInt(underlyingValue / 100) * 100)) &&
+          (c.strikePrice >= (parseInt(underlyingValue / 100) * 100) - strike_range) &&
           c.expiryDate == expiryDate
       });
 
