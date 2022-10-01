@@ -163,8 +163,8 @@
 
       strike.PE.openInterest = String(strike.PE.openInterest).replace(/(\d)(?=(\d\d)+\d$)/g, "$1,");
       strike.CE.openInterest = String(strike.CE.openInterest).replace(/(\d)(?=(\d\d)+\d$)/g, "$1,");
-      strike.PE.popenInterest = strike.PE.popenInterest.toFixed(1);
-      strike.CE.popenInterest = strike.CE.popenInterest.toFixed(1);
+      strike.PE.pchangeinOpenInterest = strike.PE.pchangeinOpenInterest.toFixed(1);
+      strike.CE.pchangeinOpenInterest = strike.CE.pchangeinOpenInterest.toFixed(1);
       strike.PE.totalTradedVolume = String(strike.PE.totalTradedVolume).replace(/(\d)(?=(\d\d)+\d$)/g,
         "$1,");
       strike.CE.totalTradedVolume = String(strike.CE.totalTradedVolume).replace(/(\d)(?=(\d\d)+\d$)/g,
