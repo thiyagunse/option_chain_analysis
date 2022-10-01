@@ -27,17 +27,17 @@
       <thead>
         <tr>
           <th>Interpretation</th>                    
-          <th>Call Price change</th>
+          <th>Price change</th>
           <th>Call LTP</th>
           <th>Call Volume</th>
-          <th>Call change in OI</th>
+          <th>change in OI</th>
           <th>Call Net OI</th>          
           <th>strike</th>
           <th>Put Net OI</th>
-          <th>Put Change in OI</th>
+          <th>Change in OI</th>
           <th>Put Volume</th>
           <th>Put LTP</th>
-          <th>Put Price Change</th> 
+          <th>Price Change</th> 
           <th>Interpretation</th>
          <!-- <th>PCR</th>
           <th>PCR Indication</th> -->
@@ -65,13 +65,13 @@
           {{/if}}
           <td class="text-right">{{ CE.openInterest }}</td>
           <th class="text-center">{{ strikePrice }}</th>
-          <td class="text-right">{{ PE.openInterest }}</td>
-          <td class="text-right">{{ PE.totalTradedVolume }}</td>
+          <td class="text-right">{{ PE.openInterest }}</td>          
            {{#if PE_A.OI}}
             <td class="text-right text-success bg-success">{{ PE.changeinOpenInterest }} <i class="glyphicon glyphicon-arrow-up"></i></td>
           {{else }}
             <td class="text-right text-danger bg-danger">{{ PE.changeinOpenInterest }} <i class="glyphicon glyphicon-arrow-down"></i></td>
           {{/if}}
+          <td class="text-right">{{ PE.totalTradedVolume }}</td>
           <td class="text-right">{{ PE.lastPrice }}</td>
           {{#if PE_A.price}}
             <td class="text-right text-success bg-success">{{ PE.change }} <i class="glyphicon glyphicon-arrow-up"></i></td>
@@ -124,7 +124,7 @@
 
     function init() {
       getData().then(function (data) {
-        expiryDates = data.records.expiryDates;
+        expiryDates = data.records.expiryDates.slice(0,5);
         underlyingValue = data.records.underlyingValue;
         selected_expiry = data.records.expiryDates[0];
         fillExpiryDate(expiryDates);
